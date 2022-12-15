@@ -23,9 +23,12 @@ class _SeeAttendanceState extends State<SeeAttendance> {
   var screenWidth;
 
   bool? ispresent;
+      
 
   @override
   Widget build(BuildContext context) {
+    final String name =
+        Provider.of<UserProvider>(context, listen: false).user.name;
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -103,7 +106,7 @@ class _SeeAttendanceState extends State<SeeAttendance> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    if (ispresent != null) Text('$ispresent')
+                    if (ispresent != null) Text('$name is PRESENT')
                   ],
                 ),
               ),
@@ -178,8 +181,11 @@ class _SeeAttendanceState extends State<SeeAttendance> {
       );
       var x = jsonDecode(res.body) as Map;
       var data = x['result'][0]['courseinfo'][0]['classattendance'] as Map;
-      String? pre = data.keys.toList().firstWhere((item) => item == prn);
-      if (pre != null) {
+      String pre = data.keys.toList().firstWhere(
+            (item) => item == prn,
+            orElse: () => "absent",
+          );
+      if (pre == prn) {
         ispresent = true;
       } else {
         ispresent = false;
