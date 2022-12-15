@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = 'https://edi-nodejs-server.herokuapp.com';
+String uri = 'https://edi-nodejs-server.onrender.com';
 
 class GlobalVariables {
   static const appBarGradient = LinearGradient(

@@ -1,3 +1,4 @@
+import 'package:edi/features/auth/screens/view_attendance.dart';
 import 'package:edi/features/home/home_screen.dart';
 import 'package:edi/screens/temp.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class GridDashboard extends StatelessWidget {
   Items item3 = Items(
     title: "View Attendance",
     subtitle: "",
-    event: "",
+    event: ViewAttendance.routeName,
     img: "assets/.png",
   );
   Items item4 = Items(

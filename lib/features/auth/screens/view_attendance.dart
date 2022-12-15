@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ViewAttendance extends StatefulWidget {
+  static const String routeName = '/view-attendance-screen';
   const ViewAttendance({super.key});
 
   @override
@@ -20,46 +21,54 @@ class _ViewAttendanceState extends State<ViewAttendance> {
   List<String>? present;
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         body: SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
           key: _getAttendanceFormKey,
-          child: Column(
-            children: [
-              const Text(
-                'See Attendance',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
+          child: Container(
+            alignment: Alignment.centerLeft,
+            margin: EdgeInsets.symmetric(
+              horizontal: screenWidth / 12,
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  'See Attendance',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                controller: _courseIdController,
-                hintText: "Enter Course ID",
-              ),
-              const SizedBox(height: 10),
-              CustomTextField(
-                controller: _dateController,
-                hintText: 'Enter Date',
-              ),
-              const SizedBox(height: 10),
-              CustomButton(
-                text: 'Fetch',
-                onTap: () async {
-                  if (_getAttendanceFormKey.currentState!.validate()) {
-                    await getData(
-                        context: context,
-                        courseid: _courseIdController.text,
-                        date: _dateController.text);
-                  }
-                },
-              ),
-              const SizedBox(height: 10),
-              if (present != null) Text('$present')
-            ],
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _courseIdController,
+                  hintText: "Enter Course ID",
+                ),
+                const SizedBox(height: 10),
+                CustomTextField(
+                  controller: _dateController,
+                  hintText: 'Enter Date',
+                ),
+                const SizedBox(height: 10),
+                CustomButton(
+                  text: 'Fetch',
+                  onTap: () async {
+                    if (_getAttendanceFormKey.currentState!.validate()) {
+                      await getData(
+                          context: context,
+                          courseid: _courseIdController.text,
+                          date: _dateController.text);
+                    }
+                  },
+                ),
+                const SizedBox(height: 10),
+                if (present != null) Text('$present')
+              ],
+            ),
           ),
         ),
       ),

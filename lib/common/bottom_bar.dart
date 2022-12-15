@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:edi/constants/global_variables.dart';
 import 'package:edi/screens/location.dart';
 import 'package:edi/screens/temp.dart';
+import 'package:edi/screens/see_attendance.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -19,7 +20,7 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const Center(child: Locate()),
-    const Center(child: Locate()),
+    const Center(child: SeeAttendance()),
     const Center(child: Logout()),
   ];
 
