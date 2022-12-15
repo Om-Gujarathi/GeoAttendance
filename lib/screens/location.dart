@@ -83,7 +83,7 @@ class _LocateState extends State<Locate> {
   }
 
   void getlocation() async {
-    if (fingerprint() == false) {
+    if (await fingerprint() == false) {
       return;
     } else {
       LocationPermission permission;
@@ -165,8 +165,6 @@ class _LocateState extends State<Locate> {
 
       var x = jsonDecode(res.body);
       print(x);
-      var data = x['result'][0]['courseinfo'][0]['classattendance'] as Map;
-      print(data.keys);
       return x['result'][0]['courseinfo'][0]['modify'];
     } catch (e) {
       print(e);
