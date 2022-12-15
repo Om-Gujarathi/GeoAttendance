@@ -23,7 +23,6 @@ class _SeeAttendanceState extends State<SeeAttendance> {
   var screenWidth;
 
   bool? ispresent;
-      
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +105,12 @@ class _SeeAttendanceState extends State<SeeAttendance> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    if (ispresent != null) Text('$name is marked PRESENT!',style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+                    if (ispresent != null)
+                      Text(
+                        '$name is marked PRESENT!',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                   ],
                 ),
               ),
@@ -166,7 +170,7 @@ class _SeeAttendanceState extends State<SeeAttendance> {
     );
   }
 
-    Future<void> getAttendance(
+  Future<void> getAttendance(
       {required BuildContext context,
       required String courseid,
       required String date,
@@ -182,13 +186,19 @@ class _SeeAttendanceState extends State<SeeAttendance> {
       print(res.body);
       var x = jsonDecode(res.body) as Map;
       if (x['result'][0]['courseinfo'][0]['classattendance'] == null) {
+        ispresent = false;
         return;
       }
       var data = x['result'][0]['courseinfo'][0]['classattendance'] as Map;
-      ispresent = data.keys.toList().firstWhere(
+      var pre = data.keys.toList().firstWhere(
             (item) => item == prn,
-            orElse: () => false,
+            orElse: () => "absent",
           );
+      if (pre == "absent") {
+        ispresent = false;
+      } else {
+        ispresent = true;
+      }
       setState(() {});
     } catch (e) {
       print(e);
