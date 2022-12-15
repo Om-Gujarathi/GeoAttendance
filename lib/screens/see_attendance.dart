@@ -3,6 +3,7 @@ import 'package:collection/src/iterable_extensions.dart';
 import 'package:edi/common/fielid_title.dart';
 import 'package:edi/constants/global_variables.dart';
 import 'package:edi/providers/user_provider.dart';
+import 'package:edi/screens/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -31,6 +32,17 @@ class _SeeAttendanceState extends State<SeeAttendance> {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: (() {
+            Navigator.pushNamed(context, Logout.routeName);
+          }),
+          backgroundColor: GlobalVariables.violetcolor,
+          elevation: 0.0,
+          child: Icon(
+            Icons.logout,
+            color: Colors.white,
+          ),
+        ),
         appBar: AppBar(
           title: const Text("See Attendance"),
           centerTitle: true,

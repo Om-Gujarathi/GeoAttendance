@@ -21,7 +21,6 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const Center(child: Locate()),
     const Center(child: SeeAttendance()),
-    const Center(child: Logout()),
   ];
 
   void updatePage(int page) {
@@ -77,27 +76,6 @@ class _BottomBarState extends State<BottomBar> {
             label: '',
           ),
           //CART PAGE
-          BottomNavigationBarItem(
-            icon: Container(
-              width: bottomBarWidth,
-              decoration: BoxDecoration(
-                  border: Border(
-                top: BorderSide(
-                  color: _page == 2
-                      ? GlobalVariables.selectedNavBarColor
-                      : GlobalVariables.backgroundColor,
-                  width: bottomBarBorderWidth,
-                ),
-              )),
-              // child: Badge(
-              //   elevation: 0,
-              //   badgeContent: const Text('2'),
-              //   badgeColor: Colors.white,
-              //   child: const Icon(Icons.shopping_cart_outlined),
-              // ),
-            ),
-            label: '',
-          )
         ],
       ),
     );

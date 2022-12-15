@@ -4,6 +4,7 @@ import 'package:edi/common/custom_textfield.dart';
 import 'package:edi/constants/global_variables.dart';
 import 'package:edi/providers/user_provider.dart';
 import 'package:edi/screens/biometric_helper.dart';
+import 'package:edi/screens/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
@@ -40,6 +41,17 @@ class _LocateState extends State<Locate> {
     final String name =
         Provider.of<UserProvider>(context, listen: false).user.name;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: (() {
+          Navigator.pushNamed(context, Logout.routeName);
+        }),
+        backgroundColor: GlobalVariables.violetcolor,
+        elevation: 0.0,
+        child: Icon(
+          Icons.logout,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: GlobalVariables.violetcolor,
         title: const Text('Attendance Portal'),
@@ -56,7 +68,9 @@ class _LocateState extends State<Locate> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(children: [
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               'Welcome, $name',
               style: const TextStyle(
@@ -64,10 +78,12 @@ class _LocateState extends State<Locate> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 15,),
-            const Image(image: AssetImage("lib/assets/images/4.jpeg"),
+            SizedBox(
+              height: 15,
+            ),
+            const Image(
+              image: AssetImage("lib/assets/images/4.jpeg"),
               height: 200,
-
             ),
             const SizedBox(height: 10),
             Container(
@@ -89,8 +105,6 @@ class _LocateState extends State<Locate> {
                     const SizedBox(height: 10),
                     CustomButton(
                       text: 'MARK ATTENDANCE',
-
-
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           getlocation();
