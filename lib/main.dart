@@ -5,6 +5,7 @@ import 'package:edi/features/home/home_screen2.dart';
 import 'package:edi/features/home/loginscreen.dart';
 import 'package:edi/providers/user_provider.dart';
 import 'package:edi/routes.dart';
+import 'package:edi/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:provider/provider.dart';
@@ -50,9 +51,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: ((routeSettings) => generateRoute(routeSettings)),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? Provider.of<UserProvider>(context).user.type == 'user' ? BottomBar() : HomeScreen()
-          : KeyboardVisibilityProvider(child: LoginScreen()),
+      home: SplashScreen(),
     );
   }
 }

@@ -24,6 +24,7 @@ class _CreateCourseState extends State<CreateCourse> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
+    String? name = user.name;
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundColor,
       body: SafeArea(
@@ -32,8 +33,8 @@ class _CreateCourseState extends State<CreateCourse> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Welcome Admin',
+              Text(
+                'Welcome $name',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
