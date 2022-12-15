@@ -166,7 +166,7 @@ class _SeeAttendanceState extends State<SeeAttendance> {
     );
   }
 
-  Future<void> getAttendance(
+    Future<void> getAttendance(
       {required BuildContext context,
       required String courseid,
       required String date,
@@ -179,17 +179,16 @@ class _SeeAttendanceState extends State<SeeAttendance> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      print(res.body);
       var x = jsonDecode(res.body) as Map;
-      var data = x['result'][0]['courseinfo'][0]['classattendance'] as Map;
-      String pre = data.keys.toList().firstWhere(
-            (item) => item == prn,
-            orElse: () => "absent",
-          );
-      if (pre == prn) {
-        ispresent = true;
-      } else {
-        ispresent = false;
+      if (x['result'][0]['courseinfo'][0]['classattendance'] == null) {
+        return;
       }
+      var data = x['result'][0]['courseinfo'][0]['classattendance'] as Map;
+      ispresent = data.keys.toList().firstWhere(
+            (item) => item == prn,
+            orElse: () => false,
+          );
       setState(() {});
     } catch (e) {
       print(e);
