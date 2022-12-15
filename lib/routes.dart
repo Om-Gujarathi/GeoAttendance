@@ -34,11 +34,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (context) => const CreateAccount(),
       );
 
-      // case Logout.routeName:
-      // return MaterialPageRoute(
-      //   settings: routeSettings,
-      //   builder: (context) => const Logout(),
-      // );
+      case Logout.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (context) => const Logout(),
+      );
 
       case LoginScreen.routeName:
       return MaterialPageRoute(

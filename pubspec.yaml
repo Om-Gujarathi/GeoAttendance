@@ -43,6 +43,7 @@ dependencies:
   fluttertoast: ^8.1.1
   flutter_keyboard_visibility: ^5.4.0
   google_fonts: ^3.0.1
+  local_auth: ^2.1.2
 
 dev_dependencies:
   flutter_test:

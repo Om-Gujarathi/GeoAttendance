@@ -3,6 +3,7 @@ import 'package:edi/common/custom_button.dart';
 import 'package:edi/common/custom_textfield.dart';
 import 'package:edi/constants/global_variables.dart';
 import 'package:edi/providers/user_provider.dart';
+import 'package:edi/screens/biometric_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
@@ -21,9 +22,23 @@ class _LocateState extends State<Locate> {
   final TextEditingController _dateController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  bool showBiometric = false;
+  bool isAuthenticated = false;
+  @override
+  void initState() {
+    isBiometricsAvailable();
+    super.initState();
+  }
+
+  isBiometricsAvailable() async {
+    showBiometric = await BiometricHelper().hasEnrolledBiometrics();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final String name = Provider.of<UserProvider>(context, listen: false).user.name;
+    final String name =
+        Provider.of<UserProvider>(context, listen: false).user.name;
     return SafeArea(
       child: Column(children: [
         Text(
@@ -68,29 +83,34 @@ class _LocateState extends State<Locate> {
   }
 
   void getlocation() async {
-    LocationPermission permission;
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    var posi = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    double dist = Geolocator.distanceBetween(
-        posi.latitude, posi.longitude, 18.463627484687272, 73.86820606393962);
-
-    print(dist);
-
-    if (dist >= 100) {
-      Fluttertoast.showToast(msg: 'Cannot mark attendance from outside of vit');
+    if (fingerprint() == false) {
+      return;
     } else {
-      await markAttendance(
-          context: context,
-          prn: Provider.of<UserProvider>(context, listen: false).user.id,
-          courseid: "1",
-          date: "3 Nov");
+      LocationPermission permission;
+
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+
+      var posi = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+
+      double dist = Geolocator.distanceBetween(
+          posi.latitude, posi.longitude, 18.463627484687272, 73.86820606393962);
+
+      print(dist);
+
+      if (dist >= 100000) {
+        Fluttertoast.showToast(
+            msg: 'Cannot mark attendance from outside of vit');
+      } else {
+        await markAttendance(
+            context: context,
+            prn: Provider.of<UserProvider>(context, listen: false).user.id,
+            courseid: _courseIdController.text,
+            date: _dateController.text);
+      }
     }
   }
 
@@ -114,6 +134,8 @@ class _LocateState extends State<Locate> {
       );
       String? canAttend =
           await howIsModify(context: context, courseid: courseid, date: date);
+      print("Attendance Startted : ");
+      print(canAttend);
       if (canAttend == null || canAttend == "false") {
         Fluttertoast.showToast(msg: "Faculty has not started the Attendance");
       } else {
@@ -129,6 +151,7 @@ class _LocateState extends State<Locate> {
       required String courseid,
       required String date}) async {
     try {
+      print(courseid + " " + date);
       http.Response res = await http.post(
         Uri.parse('$uri/edi/howIsModify'),
         body: jsonEncode({
@@ -141,6 +164,7 @@ class _LocateState extends State<Locate> {
       );
 
       var x = jsonDecode(res.body);
+      print(x);
       var data = x['result'][0]['courseinfo'][0]['classattendance'] as Map;
       print(data.keys);
       return x['result'][0]['courseinfo'][0]['modify'];
@@ -171,5 +195,10 @@ class _LocateState extends State<Locate> {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future<bool> fingerprint() async {
+    isAuthenticated = await BiometricHelper().authenticate();
+    return isAuthenticated;
   }
 }
