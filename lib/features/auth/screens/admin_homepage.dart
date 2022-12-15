@@ -90,12 +90,6 @@ class _AdminPageState extends State<AdminPage> {
                   width: bottomBarBorderWidth,
                 ),
               )),
-              // child: Badge(
-              //   elevation: 0,
-              //   badgeContent: const Text('2'),
-              //   badgeColor: Colors.white,
-              //   child: const Icon(Icons.shopping_cart_outlined),
-              // ),
             ),
             label: '',
           )
