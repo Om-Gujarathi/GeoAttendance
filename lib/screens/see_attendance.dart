@@ -65,12 +65,12 @@ class _SeeAttendanceState extends State<SeeAttendance> {
                         if (id.isEmpty) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text("Employee id is still empty!"),
+                            content: Text("Course ID is still empty!"),
                           ));
                         } else if (date.isEmpty) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
-                            content: Text("Date id is still empty!"),
+                            content: Text("Date is still empty!"),
                           ));
                         } else {
                           print('Fetching attendance...');
@@ -105,8 +105,8 @@ class _SeeAttendanceState extends State<SeeAttendance> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    if (ispresent != null) Text('$name is PRESENT')
+                    const SizedBox(height: 30),
+                    if (ispresent != null) Text('$name is marked PRESENT!',style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
                   ],
                 ),
               ),
