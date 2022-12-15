@@ -89,12 +89,12 @@ class _BottomBarState extends State<BottomBar> {
                   width: bottomBarBorderWidth,
                 ),
               )),
-              child: Badge(
-                elevation: 0,
-                badgeContent: const Text('2'),
-                badgeColor: Colors.white,
-                child: const Icon(Icons.shopping_cart_outlined),
-              ),
+              // child: Badge(
+              //   elevation: 0,
+              //   badgeContent: const Text('2'),
+              //   badgeColor: Colors.white,
+              //   child: const Icon(Icons.shopping_cart_outlined),
+              // ),
             ),
             label: '',
           )

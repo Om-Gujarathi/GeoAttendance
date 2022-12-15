@@ -39,46 +39,71 @@ class _LocateState extends State<Locate> {
   Widget build(BuildContext context) {
     final String name =
         Provider.of<UserProvider>(context, listen: false).user.name;
-    return SafeArea(
-      child: Column(children: [
-        Text(
-          'Welcome $name',
-          style: const TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w500,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: GlobalVariables.violetcolor,
+        title: const Text('Attendance Portal'),
+        centerTitle: true,
+        toolbarHeight: 60,
+        toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(25),
+            bottomLeft: Radius.circular(25),
           ),
         ),
-        const SizedBox(height: 10),
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          color: GlobalVariables.backgroundColor,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                CustomTextField(
-                  controller: _courseIdController,
-                  hintText: 'Course ID',
-                ),
-                const SizedBox(height: 10),
-                CustomTextField(
-                  controller: _dateController,
-                  hintText: 'Date',
-                ),
-                const SizedBox(height: 10),
-                CustomButton(
-                  text: 'MARK ATTENDANCE',
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      getlocation();
-                    }
-                  },
-                ),
-              ],
+      ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(children: [
+            const SizedBox(height: 10,),
+            Text(
+              'Welcome, $name',
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
+            SizedBox(height: 15,),
+            const Image(image: AssetImage("lib/assets/images/4.jpeg"),
+              height: 200,
+
+            ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(8.0),
+              color: GlobalVariables.backgroundColor,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: _courseIdController,
+                      hintText: 'Course ID',
+                    ),
+                    const SizedBox(height: 10),
+                    CustomTextField(
+                      controller: _dateController,
+                      hintText: 'Date (DD/MM/YYYY)',
+                    ),
+                    const SizedBox(height: 10),
+                    CustomButton(
+                      text: 'MARK ATTENDANCE',
+
+
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          getlocation();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ]),
         ),
-      ]),
+      ),
     );
   }
 
