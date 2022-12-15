@@ -19,7 +19,9 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: GlobalVariables.violetcolor,
+        title: Text("ADMIN PANNEL",style: TextStyle(color: Colors.black),),
+        centerTitle: true,
+        backgroundColor: GlobalVariables.secondaryColor,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(25),
@@ -74,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Welcome ${user.name}",
+                      "Welcome, Prof. ${user.name}",
                       style: GoogleFonts.openSans(
                           textStyle: const TextStyle(
                               color: Colors.black,

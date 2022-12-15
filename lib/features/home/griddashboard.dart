@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class GridDashboard extends StatelessWidget {
   Items item1 = Items(
-    title: "Create New Course",
+    title: "Create New \n\t   Course",
     subtitle: "",
     event: CreateCourse.routeName,
     img: "assets/.png",
@@ -31,7 +31,7 @@ class GridDashboard extends StatelessWidget {
     img: "assets/.png",
   );
   Items item5 = Items(
-    title: "To do",
+    title: "To do \n  list",
     subtitle: "",
     event: "",
     img: "assets/.png",
