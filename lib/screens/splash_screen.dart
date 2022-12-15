@@ -20,16 +20,18 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  Provider.of<UserProvider>(context).user.token.isNotEmpty
-                      ? Provider.of<UserProvider>(context).user.type == 'user'
-                          ? BottomBar()
-                          : HomeScreen()
-                      : KeyboardVisibilityProvider(child: LoginScreen())));
+              builder: (context) => Provider.of<UserProvider>(context)
+                      .user
+                      .token
+                      .isNotEmpty
+                  ? Provider.of<UserProvider>(context).user.type == 'user'
+                      ? BottomBar()
+                      : const HomeScreen()
+                  : const KeyboardVisibilityProvider(child: LoginScreen())));
     });
   }
 
@@ -38,6 +40,28 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         color: GlobalVariables.violetcolor,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Center(
+                  child: Image(
+                image: AssetImage('lib/assets/images/11.png'),
+                color: Colors.white,
+              )),
+              SizedBox(
+                height: 12.0,
+              ),
+              Text(
+                'Attendance System',
+                style: TextStyle(
+                    fontSize: 34,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
