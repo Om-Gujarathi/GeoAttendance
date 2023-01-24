@@ -27,6 +27,14 @@ Overall, this application is a useful tool for students, teachers, or anyone els
 ## Screenshots/Demo
 
 
+1. Student Login -
+
+https://user-images.githubusercontent.com/98649066/214312171-3f5dab46-ba5b-41ad-9a69-da9818811c89.mp4
+
+2. Admin Login - 
+
+https://user-images.githubusercontent.com/98649066/214312225-639ba714-0f3c-49d9-abe0-2865b23c1334.mp4
+
 
 ## Built With
 
