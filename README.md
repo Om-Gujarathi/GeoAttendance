@@ -1,6 +1,6 @@
 ## Overview
 
-The Attendance Management Application is a mobile application built using the Flutter framework. This application allows users to mark their attendance for a specific class or event, view their attendance history, and view attendance statistics for a class or event.
+GeoAttedance is a mobile application built using the Flutter framework. This application allows users to mark their attendance for a specific class or event, view their attendance history, and view attendance statistics for a class or event.
 
 The application has two ways to login, one for students and one for educators. The student login allows students to mark their attendance for a specific class or event and view their attendance history. This application allows students to mark their attendance for a specific class or event based on their proximity to the educator's GPS location and when the educator has started the attendance. The educator login allows educators to make new classes, view attendance statistics for a class or event and start/stop the attendance.
 
